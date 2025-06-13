@@ -524,6 +524,12 @@
             height: 100%;
             background-color: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(5px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.show {
+            opacity: 1;
         }
 
         .modal-content {
@@ -541,6 +547,14 @@
             position: relative;
             display: flex;
             flex-direction: column;
+            transform: scale(0.9) translateY(20px);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .modal.show .modal-content {
+            transform: scale(1) translateY(0);
+            opacity: 1;
         }
 
         /* Custom scrollbar for modal */
@@ -1315,11 +1329,23 @@
                     </div>
                 `;
                 modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+                
+                // Force reflow and add show class for smooth animation
+                requestAnimationFrame(() => {
+                    modal.classList.add('show');
+                });
             }
         }
 
         function closeModal() {
-            modal.style.display = 'none';
+            modal.classList.remove('show');
+            
+            // Wait for animation to complete before hiding
+            setTimeout(() => {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }, 300);
         }
 
         // Add click handlers
