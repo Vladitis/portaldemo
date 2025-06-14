@@ -13,11 +13,21 @@
 
         body {
             font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* iOS Safari fallback */
+            background-color: #000000;
+            background: #000000;
+            background: -webkit-radial-gradient(ellipse at center, #0a1428 0%, #020408 70%, #000000 100%);
+            background: -moz-radial-gradient(ellipse at center, #0a1428 0%, #020408 70%, #000000 100%);
             background: radial-gradient(ellipse at center, #0a1428 0%, #020408 70%, #000000 100%);
             color: #ffffff;
             min-height: 100vh;
+            min-height: -webkit-fill-available; /* iOS Safari fix */
             overflow-x: hidden;
             position: relative;
+            /* iOS Safari fixes */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-text-size-adjust: 100%;
         }
 
         /* Icy background effects */
@@ -27,9 +37,16 @@
             left: -50%;
             width: 200%;
             height: 200%;
+            background: -webkit-radial-gradient(circle, rgba(0, 150, 255, 0.15) 0%, rgba(0, 200, 255, 0.08) 40%, transparent 70%);
+            background: -moz-radial-gradient(circle, rgba(0, 150, 255, 0.15) 0%, rgba(0, 200, 255, 0.08) 40%, transparent 70%);
             background: radial-gradient(circle, rgba(0, 150, 255, 0.15) 0%, rgba(0, 200, 255, 0.08) 40%, transparent 70%);
             animation: float 25s ease-in-out infinite;
             z-index: -3;
+            /* iOS Safari fixes */
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            will-change: transform;
+            pointer-events: none;
         }
 
         .background-glow-2 {
@@ -38,9 +55,16 @@
             right: -30%;
             width: 150%;
             height: 150%;
+            background: -webkit-radial-gradient(circle, rgba(100, 200, 255, 0.12) 0%, rgba(0, 150, 255, 0.06) 50%, transparent 70%);
+            background: -moz-radial-gradient(circle, rgba(100, 200, 255, 0.12) 0%, rgba(0, 150, 255, 0.06) 50%, transparent 70%);
             background: radial-gradient(circle, rgba(100, 200, 255, 0.12) 0%, rgba(0, 150, 255, 0.06) 50%, transparent 70%);
             animation: float 30s ease-in-out infinite reverse;
             z-index: -3;
+            /* iOS Safari fixes */
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            will-change: transform;
+            pointer-events: none;
         }
 
         .background-glow-3 {
@@ -49,9 +73,16 @@
             left: 20%;
             width: 120%;
             height: 120%;
+            background: -webkit-radial-gradient(circle, rgba(0, 180, 255, 0.1) 0%, transparent 60%);
+            background: -moz-radial-gradient(circle, rgba(0, 180, 255, 0.1) 0%, transparent 60%);
             background: radial-gradient(circle, rgba(0, 180, 255, 0.1) 0%, transparent 60%);
             animation: float 35s ease-in-out infinite;
             z-index: -3;
+            /* iOS Safari fixes */
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            will-change: transform;
+            pointer-events: none;
         }
 
 
@@ -93,9 +124,13 @@
             align-items: center;
             padding: 2rem 3rem;
             backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             background: linear-gradient(90deg, rgba(0, 150, 255, 0.08) 0%, rgba(0, 100, 200, 0.06) 100%);
             border-bottom: 1px solid rgba(100, 200, 255, 0.2);
             box-shadow: 0 4px 30px rgba(0, 150, 255, 0.1);
+            /* iOS Safari fixes */
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
         }
 
         .logo-container {
