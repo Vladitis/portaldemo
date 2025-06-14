@@ -2,7 +2,12 @@
 <html lang="fi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#000000">
+    <meta name="msapplication-navbutton-color" content="#000000">
+    <meta name="apple-mobile-web-app-title" content="Nordic Valo Portaali">
     <title>Nordic Valo Portaali - Ympäristöhallinta</title>
     <style>
         * {
@@ -11,23 +16,62 @@
             box-sizing: border-box;
         }
 
+        html {
+            background-color: #000000 !important;
+            background: #000000 !important;
+        }
+
         body {
             font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            /* iOS Safari fallback */
-            background-color: #000000;
-            background: #000000;
-            background: -webkit-radial-gradient(ellipse at center, #0a1428 0%, #020408 70%, #000000 100%);
-            background: -moz-radial-gradient(ellipse at center, #0a1428 0%, #020408 70%, #000000 100%);
-            background: radial-gradient(ellipse at center, #0a1428 0%, #020408 70%, #000000 100%);
-            color: #ffffff;
+            /* Force dark background for iOS Safari */
+            background-color: #000000 !important;
+            background: #000000 !important;
+            background: -webkit-radial-gradient(ellipse at center, #0a1428 0%, #020408 70%, #000000 100%) !important;
+            background: -moz-radial-gradient(ellipse at center, #0a1428 0%, #020408 70%, #000000 100%) !important;
+            background: radial-gradient(ellipse at center, #0a1428 0%, #020408 70%, #000000 100%) !important;
+            color: #ffffff !important;
             min-height: 100vh;
             min-height: -webkit-fill-available; /* iOS Safari fix */
+            height: 100%;
             overflow-x: hidden;
             position: relative;
             /* iOS Safari fixes */
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             -webkit-text-size-adjust: 100%;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            /* Force GPU acceleration */
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+        }
+
+        /* iOS Safari aggressive dark mode fix */
+        @supports (-webkit-touch-callout: none) {
+            html, body {
+                background-color: #000000 !important;
+                background: #000000 !important;
+                background-image: none !important;
+            }
+            
+            body {
+                background: -webkit-radial-gradient(ellipse at center, #0a1428 0%, #020408 70%, #000000 100%) !important;
+                background: radial-gradient(ellipse at center, #0a1428 0%, #020408 70%, #000000 100%) !important;
+            }
+        }
+
+        /* iOS specific media query */
+        @media screen and (-webkit-min-device-pixel-ratio: 1) and (max-device-width: 812px) {
+            html, body {
+                background-color: #000000 !important;
+                background: #000000 !important;
+            }
+            
+            body {
+                background: -webkit-radial-gradient(ellipse at center, #0a1428 0%, #020408 70%, #000000 100%) !important;
+                background: radial-gradient(ellipse at center, #0a1428 0%, #020408 70%, #000000 100%) !important;
+                -webkit-appearance: none !important;
+            }
         }
 
         /* Jäiset tausta-efektit */
@@ -131,6 +175,9 @@
             /* iOS Safari fixes */
             -webkit-transform: translateZ(0);
             transform: translateZ(0);
+            /* Ensure header stays above background effects */
+            position: relative;
+            z-index: 10;
         }
 
         .logo-container {
@@ -154,6 +201,7 @@
                 0 0 60px rgba(0, 150, 255, 0.2),
                 inset 0 0 20px rgba(100, 200, 255, 0.1);
             position: relative;
+            z-index: 1;
         }
 
         .logo::before {
@@ -753,6 +801,16 @@
                 flex: 1;
                 justify-content: space-between;
                 align-items: center;
+                gap: 0.5rem;
+                min-width: 0;
+            }
+
+            .logo-container > div:first-child {
+                flex: 1;
+                min-width: 0;
+                display: flex;
+                align-items: center;
+                gap: 0.8rem;
             }
 
             .nv-title {
@@ -958,6 +1016,14 @@
 
         /* Extra small screens */
         @media (max-width: 360px) {
+            .nv-title {
+                font-size: 1rem;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: calc(100vw - 160px);
+            }
+
             .main-content {
                 padding: 1rem 0.8rem;
             }
